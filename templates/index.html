@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Bem Vindo(a) ao Blog {% endblock %}</h1>
+    <hr>
+	<section>
+		<article id="posts">
+			<dl>
+			{% for post in posts %}
+				<dt>
+					<a href= "{{ url_for('post', post_id=post['id']) }}">
+						<h3>{{ post['title'] }}</h3>
+					</a>
+					<span class="badge badge-primary">{{ post['created'].strftime("%d-%b-%Y %H:%M") }}</span>
+					<a href="{{ url_for('edit', post_id=post['id']) }}">
+						<span class="badge badge-warning">Editar</span>
+					</a>
+				</dt>
+				<dd>
+					{{ post['content'][:250]+" ..." }}
+				</dd>
+				<hr>
+				</br>
+			{% endfor %}
+			</dl>
+		</article>
+	</section>
+{% endblock %}
